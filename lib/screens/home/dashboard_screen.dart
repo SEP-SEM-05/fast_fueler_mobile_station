@@ -15,25 +15,37 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   final DUMMY_CATEGORIES = const [
     Category(
-        id: 'c1',
-        title: 'Auto Diesel',
-        color: Colors.green,
-        qet: "2022/11/13 02:13:00"),
+      id: 'c1',
+      title: 'Auto Diesel',
+      color: Color.fromARGB(255, 43, 153, 159),
+      qet: "2022/11/13 02:13:00",
+      vehicles: "12",
+      quata: "123",
+    ),
     Category(
-        id: 'c2',
-        title: 'Super Diesel',
-        color: Colors.green,
-        qet: "2022/11/13 02:13:00"),
+      id: 'c2',
+      title: 'Super Diesel',
+      color: Colors.green,
+      qet: "2022/11/13 02:13:00",
+      vehicles: "12",
+      quata: "123",
+    ),
     Category(
-        id: 'c3',
-        title: 'Petrol 95 Octane',
-        color: Colors.orange,
-        qet: "2022/11/13 02:13:00"),
+      id: 'c3',
+      title: 'Petrol 95 Octane',
+      color: Color.fromARGB(255, 43, 153, 159),
+      qet: "2022/11/13 02:13:00",
+      vehicles: "12",
+      quata: "123",
+    ),
     Category(
-        id: 'c4',
-        title: 'Petrol 92 Octane',
-        color: Colors.orange,
-        qet: "2022/11/13 02:13:00"),
+      id: 'c4',
+      title: 'Petrol 92 Octane',
+      color: Color.fromARGB(255, 214, 129, 0),
+      qet: "2022/11/13 02:13:00",
+      vehicles: "12",
+      quata: "123",
+    ),
   ];
 
   @override
@@ -54,7 +66,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: Icon(
               Icons.logout,
               color: Colors.white,
-            ), onPressed: () => HomeServices().logOut(context),
+            ),
+            onPressed: () => HomeServices().logOut(context),
           ),
         ],
       ),
@@ -65,17 +78,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: DUMMY_CATEGORIES
               .map(
                 (catData) => CategoryItem(
-                  catData.id,
-                  catData.title,
-                  catData.color,
-                  catData.qet,
-                ),
+                    catData.id,
+                    catData.title,
+                    catData.color,
+                    catData.qet,
+                    catData.vehicles,
+                    catData.quata),
               )
               .toList(),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 400,
-            childAspectRatio: 2,
-            mainAxisSpacing: 20,
+            childAspectRatio: 2.5,
+            mainAxisSpacing: 25,
           ),
         ),
       ),
