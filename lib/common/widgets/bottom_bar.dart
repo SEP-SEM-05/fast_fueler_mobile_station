@@ -78,7 +78,7 @@ class _BottomBarState extends State<BottomBar> {
                 ),
               ),
               child: const Icon(
-                Icons.person_outline_outlined,
+                Icons.qr_code_2_outlined,
               ),
             ),
             label: '',
