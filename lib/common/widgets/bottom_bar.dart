@@ -63,7 +63,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
-          // ACCOUNT
+          // QR
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class CategoryItem extends StatelessWidget {
-  final String id;
-  final String title;
+  final String? id;
+  final String? title;
   final Color color;
   final String qet;
   final String vehicles;
@@ -35,6 +36,7 @@ class CategoryItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +46,7 @@ class CategoryItem extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        title,
+                        "$title",
                         style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -58,7 +60,7 @@ class CategoryItem extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Queue end Time: $qet",
+                        "Queue end Time:${(DateFormat.yMEd().add_jms().format(DateTime.parse(qet))).split(',')[1]}",
                         style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -80,7 +82,7 @@ class CategoryItem extends StatelessWidget {
                         vehicles,
                         style: GoogleFonts.bungee(
                           fontSize: 30,
-                          color: Color.fromARGB(255, 255, 221, 134),
+                          color: const Color.fromARGB(255, 255, 221, 134),
                         ),
                       ),
                       Text(
@@ -95,46 +97,49 @@ class CategoryItem extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.bar_chart_rounded,
-                        size: 25,
-                        color: Colors.white,
-                      )
-                    ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.bar_chart_rounded,
+                          size: 25,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: Row(
-                    children: [
-                      Text(
-                        "$quata L",
-                        style: GoogleFonts.lilitaOne(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 255, 221, 134)),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "$quata L",
+                          style: GoogleFonts.lilitaOne(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 255, 221, 134)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
-                  child: Text(
-                    " remaining",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Text(
+                      " remaining",
+                      style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

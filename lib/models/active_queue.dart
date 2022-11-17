@@ -5,7 +5,7 @@ class ActiveQueue {
   final String? id;
   final String? stationID;
   final String? fuelType;
-  final List<dynamic> requests;
+  final Map<String, dynamic> requests;
   final String vehicleCount;
   final String selectedAmount;
   final String queueStartTime;

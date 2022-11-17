@@ -28,7 +28,6 @@ class _SigninState extends State<SigninScreen> {
   }
 
   void signInUser() {
-    print("sign in method called in Ui");
     authService.signInUser(
       context: context,
       registrationNo: _regNoController.text,

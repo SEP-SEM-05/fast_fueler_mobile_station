@@ -18,7 +18,6 @@ class AuthService {
     required String password,
   }) async {
     try {
-      print("start");
       http.Response res = await http.post(
         Uri.parse('$uri/mobileauth/api/signin'),
         body: jsonEncode({
@@ -29,8 +28,6 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      print("resp");
-      print(res.body);
       httpErrorHandle(
         response: res,
         context: context,

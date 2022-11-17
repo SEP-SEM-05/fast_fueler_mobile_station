@@ -37,8 +37,8 @@ class HomeServices {
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': userProvider.user.token,
           });
-      debugPrint("methana");
-      // debugPrint(res);
+      // debugPrint("methana");
+      // debugPrint(res.body);
 
       httpErrorHandle(
         response: res,
@@ -56,7 +56,6 @@ class HomeServices {
         },
       );
     } catch (e) {
-      debugPrint("here me");
       showSnackBar(context, e.toString());
     }
     return activeQueues;
