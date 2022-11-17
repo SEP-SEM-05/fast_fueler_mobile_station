@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     print("starting point");
     super.initState();
     getData();
-  }
+  } 
 
   void getData() async {
     var a = await authService.getUserData(context);
