@@ -1,3 +1,4 @@
+
 import 'package:fast_fueler_mobile_station/common/widgets/bottom_bar.dart';
 import 'package:fast_fueler_mobile_station/common/widgets/home_loading.dart';
 import 'package:fast_fueler_mobile_station/providers/user_provider.dart';
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     print("starting point");
     super.initState();
     getData();
-  } 
+  }
 
   void getData() async {
     var a = await authService.getUserData(context);
