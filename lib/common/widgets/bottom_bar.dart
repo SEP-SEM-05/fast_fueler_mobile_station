@@ -1,9 +1,7 @@
 import 'package:fast_fueler_mobile_station/constants/global_variables.dart';
 import 'package:fast_fueler_mobile_station/screens/distribution/qr_screen.dart';
 import 'package:fast_fueler_mobile_station/screens/home/dashboard_screen.dart';
-import 'package:fast_fueler_mobile_station/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';

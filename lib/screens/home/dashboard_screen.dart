@@ -1,5 +1,4 @@
 import 'package:fast_fueler_mobile_station/common/widgets/home_loading.dart';
-import 'package:fast_fueler_mobile_station/common/widgets/loader.dart';
 import 'package:fast_fueler_mobile_station/models/active_queue.dart';
 import 'package:fast_fueler_mobile_station/widgets/category_item.dart';
 import 'package:flutter/material.dart';

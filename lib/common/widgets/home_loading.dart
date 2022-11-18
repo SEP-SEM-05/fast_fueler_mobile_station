@@ -11,7 +11,7 @@ class HomeLoading extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return DecoratedBox(
             decoration: BoxDecoration(
-              color: index.isEven ? Color.fromARGB(255, 255, 17, 0) : Color.fromARGB(255, 0, 255, 8),
+              color: index.isEven ? const Color.fromARGB(255, 255, 17, 0) : const Color.fromARGB(255, 0, 255, 8),
             ),
           );
         },

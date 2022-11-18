@@ -94,14 +94,14 @@ class _DistributionScreenState extends State<DistributionScreen> {
       check = false;
     }
 
-    print('menna data');
-    print(activeQueues);
-    print(reg);
-    print(nic);
-    print(check);
-    print(data);
-    print(fType);
-    print(qID);
+    // print('menna data');
+    // print(activeQueues);
+    // print(reg);
+    // print(nic);
+    // print(check);
+    // print(data);
+    // print(fType);
+    // print(qID);
 
     return WillPopScope(
       onWillPop: () async {
