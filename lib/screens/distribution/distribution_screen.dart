@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'dart:ffi';
 
 import 'package:fast_fueler_mobile_station/common/widgets/home_loading.dart';
@@ -46,24 +47,21 @@ class _DistributionScreenState extends State<DistributionScreen> {
 
   fetchAllActiveQueues() async {
     activeQueues = await homeServices.fetchAllActiveQueues(context);
-    // debugPrint(activeQueues![1]
-    //     .requests
-    //     .containsKey(widget.value.code!.split('&')[0])
-    //     .toString());
     setState(() {});
   }
 
   void refill(data, fType, qID, sID) {
-    distributionServices.refill(
-      context: context,
-      filledAmount: _filledController.text.isEmpty
-          ? data['quota']
-          : _filledController.text,
-      registrationNo: data['registrationNo'] ?? data['userID'],
-      stationRegNo: sID,
-      queueID: qID,
-      fuelType: fType,
-    );
+    // distributionServices.refill(
+    //   context: context,
+    //   filledAmount: _filledController.text.isEmpty
+    //       ? data['quota']
+    //       : _filledController.text,
+    //   registrationNo: data['registrationNo'] ?? data['userID'],
+    //   stationRegNo: sID,
+    //   queueID: qID,
+    //   fuelType: fType,
+    // );
+    debugPrint("obannepa oka");
   }
 
   @override
@@ -77,6 +75,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
     String? fType;
     String? qID;
     String? sID;
+    var padding = 20.0;
 
     if (activeQueues != null) {
       for (var i = 0; i < activeQueues!.length; i++) {
@@ -91,331 +90,354 @@ class _DistributionScreenState extends State<DistributionScreen> {
           break;
         }
       }
-      check = false;
+      check ??= false;
     }
-
-    // print('menna data');
-    // print(activeQueues);
-    // print(reg);
-    // print(nic);
-    // print(check);
-    // print(data);
-    // print(fType);
-    // print(qID);
 
     return WillPopScope(
       onWillPop: () async {
         widget.screenClosed(); // Action to perform on back pressed
         return true;
       },
-      child: check==null ? const HomeLoading() : check
-          ? Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    widget.screenClosed();
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_outlined,
+      child: check == null
+          ? const HomeLoading()
+          : check
+              ? Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        widget.screenClosed();
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_outlined,
+                      ),
+                    ),
+                    title: Text(
+                      "Fast Fueler",
+                      style: GoogleFonts.pacifico(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23,
+                          color: const Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: const Color.fromARGB(255, 51, 136, 54),
                   ),
-                ),
-                title: Text(
-                  "Fast Fueler",
-                  style: GoogleFonts.pacifico(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 23,
-                      color: const Color.fromARGB(255, 255, 255, 255)),
-                ),
-                centerTitle: true,
-                backgroundColor: const Color.fromARGB(255, 51, 136, 54),
-              ),
-              backgroundColor: const Color.fromARGB(255, 246, 243, 236),
-              body: SingleChildScrollView(
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  backgroundColor: Colors.green[50],
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              padding, padding + 10, padding, 0),
+                          child: Column(
                             children: [
                               Card(
-                                color: const Color.fromARGB(255, 51, 136, 54),
-                                elevation: 10,
-                                shadowColor: const Color.fromARGB(255, 4, 4, 4),
-                                // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
+                                color: Colors.teal[500],
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.verified,
-                                        size: 35,
-                                        color: Colors.white,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Quota :  ${double.parse((data['quota']).toStringAsFixed(2))} L",
+                                            style: GoogleFonts.lilitaOne(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.white),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        " Eligible",
-                                        style: GoogleFonts.rubikBubbles(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 35,
-                                            color: const Color.fromARGB(
-                                                255, 255, 255, 255)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          const Icon(
+                                            Icons.verified,
+                                            size: 42,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            " ELIGIBLE ",
+                                            style: GoogleFonts.titanOne(
+                                                fontSize: 42,
+                                                color: const Color.fromARGB(
+                                                    255, 255, 255, 255)),
+                                          ),
+                                          const Icon(
+                                            Icons.verified,
+                                            size: 42,
+                                            color: Colors.white,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "$fType",
+                                        style: GoogleFonts.lilitaOne(
+                                            fontSize: 35, color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Card(
-                                color: Colors.grey,
-                                elevation: 10,
-                                shadowColor: const Color.fromARGB(255, 4, 4, 4),
-                                // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        "Quota",
-                                        style: GoogleFonts.lilitaOne(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width -
+                                        padding * 2,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 30, 0, 30),
+                                      child: Card(
+                                        color: const Color.fromARGB(
+                                            255, 51, 136, 54),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: nic == "org"
+                                              ? Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Icon(
+                                                          Icons
+                                                              .emoji_transportation_rounded,
+                                                          color: Colors.white,
+                                                          size: 27,
+                                                        ),
+                                                        Text(
+                                                          "Organization Details",
+                                                          style: GoogleFonts
+                                                              .padauk(
+                                                                  fontSize: 25,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900,
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        "Registration No: $reg",
+                                                        style: GoogleFonts
+                                                            .ubuntuCondensed(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        const Icon(
+                                                          Icons
+                                                              .directions_car_filled_rounded,
+                                                          color: Colors.white,
+                                                          size: 27,
+                                                        ),
+                                                        Text(
+                                                          "Vehicle Details",
+                                                          style: GoogleFonts
+                                                              .padauk(
+                                                                  fontSize: 25,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900,
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .fromLTRB(
+                                                          0, 12, 0, 8),
+                                                      child: Text(
+                                                        "Registration No : $reg",
+                                                        style: GoogleFonts
+                                                            .ubuntuCondensed(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                          .fromLTRB(0, 0, 0, 8),
+                                                      child: Text(
+                                                        "Owner NIC : $nic",
+                                                        style: GoogleFonts
+                                                            .ubuntuCondensed(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                        ),
                                       ),
-                                      Text(
-                                        "${double.parse((data['quota']).toStringAsFixed(2))} L",
-                                        style: GoogleFonts.lilitaOne(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromARGB(
-                                                255, 152, 66, 66)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Card(
-                                  color: fType!.contains("Petrol")
-                                      ? const Color.fromARGB(255, 214, 129, 0)
-                                      : Colors.green,
-                                  elevation: 10,
-                                  shadowColor:
-                                      const Color.fromARGB(255, 4, 4, 4),
-                                  // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Text(
-                                      fType,
-                                      style: GoogleFonts.russoOne(
-                                          fontSize: 35,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 10),
+                          child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Card(
-                                  color: nic.contains("org")
-                                      ? const Color.fromARGB(255, 118, 101, 83)
-                                      : const Color.fromARGB(255, 86, 116, 86),
-                                  elevation: 10,
-                                  shadowColor:
-                                      const Color.fromARGB(255, 4, 4, 4),
-                                  // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 16.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: nic == "org"
-                                        ? Column(
-                                            children: [
-                                              Text(
-                                                "Organization Details",
-                                                style: GoogleFonts.russoOne(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  "➤ Registration No: $reg",
-                                                  style: GoogleFonts
-                                                      .ubuntuCondensed(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Vehicle Details",
-                                                style: GoogleFonts.russoOne(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 12, 0, 8),
-                                                child: Text(
-                                                  "➤ Registration No: $reg",
-                                                  style: GoogleFonts
-                                                      .ubuntuCondensed(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 0, 0, 8),
-                                                child: Text(
-                                                  "➤ Owner NIC: $nic",
-                                                  style: GoogleFonts
-                                                      .ubuntuCondensed(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.white),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                  ),
-                                ),
+                              const Divider(
+                                thickness: 2,
+                                color: Colors.black54,
                               ),
-                            ],
-                          ),
-                          Form(
-                            key: formKey,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(20, 25, 20, 0),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.number,
-                                    controller: _filledController,
-                                    validator: (value) {
-                                          if (double.parse(value!) > double.parse((data['quota']))) {
+                              Form(
+                                key: formKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 0),
+                                      child: Text(
+                                          "If the Filled Amount is less than the Fuel Quota, Enter the Filled Amount!",
+                                          style: GoogleFonts.ubuntuCondensed(
+                                            fontSize: 13,
+                                            color: Colors.black87,
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 5, 20, 0),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        controller: _filledController,
+                                        validator: (value) {
+                                          if (int.parse(value!) >
+                                              (data['quota'])) {
                                             return 'Cannot fill more than the Quota';
                                           }
                                           return null;
                                         },
-                                    decoration: InputDecoration(
-                                        hintText: 'Enter Filled Amount',
-                                        enabledBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(0),
-                                            borderSide: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 20, 20, 20))),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            borderSide: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 20, 20, 20))),
-                                        errorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            borderSide: const BorderSide(
-                                                color: Colors.red)),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(16),
-                                            borderSide: const BorderSide(color: Colors.red))),
-                                  ),
-                                ),
-                                Text(
-                                  "If Filled Amount less than the Fuel Quota, Enter the Filled Amount!",
-                                  style: GoogleFonts.ubuntuCondensed(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color.fromARGB(255, 79, 79, 79)),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 60, 10, 0),
-                                  child: SizedBox(
-                                    height: 80,
-                                    width: 600,
-                                    child: ElevatedButton(
-                                        style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    const Color.fromARGB(
-                                                        255, 43, 144, 144)),
-                                            shape: MaterialStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Colors.white,
+                                            hintText: 'Filled Amount',
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.grey)),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.grey)),
+                                            errorBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.red)),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(12.0),
-                                            ))),
-                                        onPressed: () {
-                                          if (formKey.currentState!
-                                              .validate()) {
-                                            refill(data, fType, qID, sID);
-                                          } else {
-                                            debugPrint("not ok");
-                                          }
-                                        },
-                                        child: const Text(
-                                          "CONFIRM REFILMENT",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
+                                                  BorderRadius.circular(10),
+                                              borderSide: const BorderSide(
+                                                  color: Colors.red),
+                                            )),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 20, 10, 0),
+                                      child: SizedBox(
+                                        height: 110,
+                                        width: 170,
+                                        child: ElevatedButton(
+                                            style: ButtonStyle(
+                                                elevation:
+                                                    MaterialStateProperty.all(
+                                                        20),
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.teal[800]),
+                                                shape: MaterialStateProperty.all<
+                                                        RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                ))),
+                                            onPressed: () {
+                                              if (formKey.currentState!
+                                                  .validate()) {
+                                                refill(data, fType, qID, sID);
+                                              } else {
+                                                debugPrint("not ok");
+                                              }
+                                            },
+                                            child: const Text(
+                                              "  CONFIRM\nREFILMENT",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                  ],
-                ),
-              ))
-          : Scaffold(body: Text("not eligible")),
+                  ))
+              : const Scaffold(body: Text("not eligible")),
     );
   }
 }

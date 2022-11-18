@@ -17,12 +17,6 @@ class DistributionServices {
       required fuelType,
       required queueID}) async {
     try {
-      // print('menna data');
-      // print(registrationNo);
-      // print(filledAmount);
-      // print(stationRegNo);
-      // print(fuelType);
-      // print(queueID);
 
       final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -43,7 +37,6 @@ class DistributionServices {
           response: res,
           context: context,
           onSuccess: () {
-            debugPrint("onna done");
             Navigator.pop(context);
           });
     } catch (e) {

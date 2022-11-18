@@ -10,6 +10,7 @@ class CategoryItem extends StatelessWidget {
   final String vehicles;
   final String quata;
 
+  // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
   CategoryItem(
       this.id, this.title, this.color, this.qet, this.vehicles, this.quata);
 
@@ -123,7 +124,7 @@ class CategoryItem extends StatelessWidget {
                           style: GoogleFonts.lilitaOne(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 255, 221, 134)),
+                              color: const Color.fromARGB(255, 255, 221, 134)),
                         ),
                       ],
                     ),
