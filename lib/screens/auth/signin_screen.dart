@@ -1,30 +1,26 @@
 import 'package:fast_fueler_mobile_station/screens/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../models/station.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 class SigninScreen extends StatefulWidget {
   static const String routeName = '/signin';
   const SigninScreen({Key? key}) : super(key: key);
 
   @override
-  _SigninState createState() => _SigninState();
+  SigninState createState() => SigninState();
 }
 
-class _SigninState extends State<SigninScreen> {
+class SigninState extends State<SigninScreen> {
   final AuthService authService = AuthService();
   final TextEditingController _regNoController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _regNoController.dispose();
     _passwordController.dispose();
-    _nameController.dispose();
   }
 
   void signInUser() {
@@ -35,13 +31,8 @@ class _SigninState extends State<SigninScreen> {
     );
   }
 
-  static const IconData local_gas_station_rounded =
-      IconData(0xf86d, fontFamily: 'MaterialIcons');
-
   final _formKey = GlobalKey<FormState>();
 
-
-  Station station = Station('', '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,16 +66,16 @@ class _SigninState extends State<SigninScreen> {
                         style: GoogleFonts.pacifico(
                             fontWeight: FontWeight.bold,
                             fontSize: 38,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                            color: const Color.fromARGB(255, 255, 255, 255)),
                       ),
-                      Icon(
-                        local_gas_station_rounded,
+                      const Icon(
+                        Icons.local_gas_station_rounded,
                         size: 40,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   Text(
@@ -92,18 +83,15 @@ class _SigninState extends State<SigninScreen> {
                     style: GoogleFonts.signikaNegative(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Color.fromARGB(255, 17, 17, 17)),
+                        color: const Color.fromARGB(255, 17, 17, 17)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: TextFormField(
                       controller: _regNoController,
-                      onChanged: (value) {
-                        station.registrationNo = value;
-                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter Registration Number';
@@ -112,35 +100,32 @@ class _SigninState extends State<SigninScreen> {
                         }
                       },
                       decoration: InputDecoration(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.business,
                             size: 30,
                             color: Color.fromARGB(255, 20, 20, 20),
                           ),
-                          hintText: 'Enter Registration Number',
+                          hintText: 'Registration Number',
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 20, 20, 20))),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 20, 20, 20))),
                           errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)),
+                              borderSide: const BorderSide(color: Colors.red)),
                           focusedErrorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red))),
+                              borderSide: const BorderSide(color: Colors.red))),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: TextFormField(
                       controller: _passwordController,
-                      onChanged: (value) {
-                        station.password = value;
-                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Enter the Password';
@@ -149,37 +134,37 @@ class _SigninState extends State<SigninScreen> {
                       },
                       obscureText: true,
                       decoration: InputDecoration(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.vpn_key,
                             size: 30,
                             color: Color.fromARGB(255, 20, 20, 20),
                           ),
-                          hintText: 'Enter Password',
+                          hintText: 'Password',
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 20, 20, 20))),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 20, 20, 20))),
                           errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red)),
+                              borderSide: const BorderSide(color: Colors.red)),
                           focusedErrorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(color: Colors.red))),
+                              borderSide: const BorderSide(color: Colors.red))),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(60, 16, 16, 0),
-                    child: Container(
+                    padding: const EdgeInsets.fromLTRB(60, 16, 16, 0),
+                    child: SizedBox(
                       height: 50,
                       width: 400,
                       child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 58, 166, 185)),
+                                  const Color.fromARGB(255, 58, 166, 185)),
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -189,10 +174,10 @@ class _SigninState extends State<SigninScreen> {
                             if (_formKey.currentState!.validate()) {
                               signInUser();
                             } else {
-                              print("not ok");
+                              debugPrint("not ok");
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             "LOGIN",
                             style: TextStyle(
                                 color: Colors.white,

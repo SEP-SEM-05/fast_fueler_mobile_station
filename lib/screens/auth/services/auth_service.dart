@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:fast_fueler_mobile_station/common/widgets/bottom_bar.dart';
@@ -33,8 +35,8 @@ class AuthService {
         context: context,
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          Provider.of<UserProvider>(context).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           Navigator.pushNamedAndRemoveUntil(
             context,
             BottomBar.routeName,
@@ -43,7 +45,7 @@ class AuthService {
         },
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, "Invalid Login Details. Try Again");
     }
   }
 
@@ -77,16 +79,12 @@ class AuthService {
             'x-auth-token': token
           },
         );
-
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
-        
       }
-      print("load done");
-      
       return true;
     } catch (e) {
-      showSnackBar(context, e.toString());
+      debugPrint("first login");
       return true;
     }
   }

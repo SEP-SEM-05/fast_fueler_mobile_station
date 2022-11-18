@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 String uri = 'http://192.168.43.210:5000';
+// String uri =
+//     "http://fastfuelerbackend-env.eba-ueymd2ax.us-east-1.elasticbeanstalk.com";
 
 class GlobalVariables {
   // COLORS

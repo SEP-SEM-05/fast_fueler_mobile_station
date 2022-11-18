@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:fast_fueler_mobile_station/common/widgets/home_loading.dart';
 import 'package:fast_fueler_mobile_station/screens/distribution/services/distribution_services.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,10 +46,10 @@ class _DistributionScreenState extends State<DistributionScreen> {
 
   fetchAllActiveQueues() async {
     activeQueues = await homeServices.fetchAllActiveQueues(context);
-    debugPrint(activeQueues![1]
-        .requests
-        .containsKey(widget.value.code!.split('&')[0])
-        .toString());
+    // debugPrint(activeQueues![1]
+    //     .requests
+    //     .containsKey(widget.value.code!.split('&')[0])
+    //     .toString());
     setState(() {});
   }
 
@@ -56,8 +59,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
       filledAmount: _filledController.text.isEmpty
           ? data['quota']
           : _filledController.text,
-      registrationNo:
-          data['registrationNo'] ?? data['userID'],
+      registrationNo: data['registrationNo'] ?? data['userID'],
       stationRegNo: sID,
       queueID: qID,
       fuelType: fType,
@@ -70,7 +72,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
     var nic = widget.value.code!.split("&").length > 1
         ? widget.value.code!.split("&")[1]
         : 'org';
-    var check = false;
+    bool? check;
     var data = {};
     String? fType;
     String? qID;
@@ -85,23 +87,28 @@ class _DistributionScreenState extends State<DistributionScreen> {
           fType = q.fuelType;
           qID = q.id;
           sID = q.stationID;
+          setState(() {});
           break;
         }
       }
+      check = false;
     }
 
-    // print('menna data');
-    // print(check);
-    // print(data);
-    // print(fType);
-    // print(qID);
+    print('menna data');
+    print(activeQueues);
+    print(reg);
+    print(nic);
+    print(check);
+    print(data);
+    print(fType);
+    print(qID);
 
     return WillPopScope(
       onWillPop: () async {
         widget.screenClosed(); // Action to perform on back pressed
         return true;
       },
-      child: check
+      child: check==null ? const HomeLoading() : check
           ? Scaffold(
               appBar: AppBar(
                 leading: IconButton(
@@ -244,7 +251,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: nic != "org"
+                                    child: nic == "org"
                                         ? Column(
                                             children: [
                                               Text(
@@ -327,7 +334,12 @@ class _DistributionScreenState extends State<DistributionScreen> {
                                   child: TextFormField(
                                     keyboardType: TextInputType.number,
                                     controller: _filledController,
-                                    onChanged: null,
+                                    validator: (value) {
+                                          if (double.parse(value!) > double.parse((data['quota']))) {
+                                            return 'Cannot fill more than the Quota';
+                                          }
+                                          return null;
+                                        },
                                     decoration: InputDecoration(
                                         hintText: 'Enter Filled Amount',
                                         enabledBorder: OutlineInputBorder(
@@ -357,7 +369,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
                                   style: GoogleFonts.ubuntuCondensed(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 79, 79, 79)),
+                                      color: const Color.fromARGB(255, 79, 79, 79)),
                                 ),
                                 Padding(
                                   padding:
@@ -403,7 +415,7 @@ class _DistributionScreenState extends State<DistributionScreen> {
                   ],
                 ),
               ))
-          : Scaffold(),
+          : Scaffold(body: Text("not eligible")),
     );
   }
 }

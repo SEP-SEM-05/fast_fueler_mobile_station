@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:fast_fueler_mobile_station/models/active_queue.dart';
 import 'package:fast_fueler_mobile_station/screens/auth/signin_screen.dart';
@@ -22,7 +24,7 @@ class HomeServices {
         (route) => false,
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, "Logout failed. Try Again");
     }
   }
 
@@ -37,8 +39,6 @@ class HomeServices {
             'Content-Type': 'application/json; charset=UTF-8',
             'x-auth-token': userProvider.user.token,
           });
-      // debugPrint("methana");
-      // debugPrint(res.body);
 
       httpErrorHandle(
         response: res,
@@ -56,7 +56,7 @@ class HomeServices {
         },
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, "Unable to fetch the active Queues");
     }
     return activeQueues;
   }

@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    print("starting point");
     super.initState();
     getData();
   }
@@ -48,9 +47,9 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => generateRoute(settings),
       home: homeLoaded
           ? (Provider.of<UserProvider>(context).user.token.isNotEmpty
-              ? BottomBar()
-              : SigninScreen())
-          : HomeLoading(),
+              ? const BottomBar()
+              : const SigninScreen())
+          : const HomeLoading(),
     );
   }
 }
