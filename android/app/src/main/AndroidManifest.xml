@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fast_fueler_mobile_station">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="fast_fueler_mobile_station"
+        android:label="Fast Fueler"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

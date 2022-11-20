@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fast Fueler Station',
+      title: 'Fast Fueler',
       onGenerateRoute: (settings) => generateRoute(settings),
       home: homeLoaded
           ? (Provider.of<UserProvider>(context).user.token.isNotEmpty

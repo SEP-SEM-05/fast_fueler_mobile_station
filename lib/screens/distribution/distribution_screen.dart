@@ -51,17 +51,16 @@ class _DistributionScreenState extends State<DistributionScreen> {
   }
 
   void refill(data, fType, qID, sID) {
-    // distributionServices.refill(
-    //   context: context,
-    //   filledAmount: _filledController.text.isEmpty
-    //       ? data['quota']
-    //       : _filledController.text,
-    //   registrationNo: data['registrationNo'] ?? data['userID'],
-    //   stationRegNo: sID,
-    //   queueID: qID,
-    //   fuelType: fType,
-    // );
-    debugPrint("obannepa oka");
+    distributionServices.refill(
+      context: context,
+      filledAmount: _filledController.text.isEmpty
+          ? data['quota']
+          : _filledController.text,
+      registrationNo: data['registrationNo'] ?? data['userID'],
+      stationRegNo: sID,
+      queueID: qID,
+      fuelType: fType,
+    );
   }
 
   @override
@@ -356,9 +355,11 @@ class _DistributionScreenState extends State<DistributionScreen> {
                                         keyboardType: TextInputType.number,
                                         controller: _filledController,
                                         validator: (value) {
-                                          if (int.parse(value!) >
-                                              (data['quota'])) {
-                                            return 'Cannot fill more than the Quota';
+                                          if (value != "") {
+                                            if (int.parse(value!) >
+                                                (data['quota'])) {
+                                              return 'Cannot fill more than the Quota';
+                                            }
                                           }
                                           return null;
                                         },
@@ -437,7 +438,91 @@ class _DistributionScreenState extends State<DistributionScreen> {
                       ],
                     ),
                   ))
-              : const Scaffold(body: Text("not eligible")),
+              : Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                      onPressed: () {
+                        widget.screenClosed();
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_outlined,
+                      ),
+                    ),
+                    title: Text(
+                      "Fast Fueler",
+                      style: GoogleFonts.pacifico(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23,
+                          color: const Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: Colors.red[900],
+                  ),
+                  backgroundColor: Colors.red[40],
+                  body: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 30, 10, 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 250,
+                          child: Card(
+                            color: Colors.red[500],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      const Icon(
+                                        Icons.dangerous_rounded,
+                                        size: 42,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        "     NOT\nELIGIBLE ",
+                                        style: GoogleFonts.titanOne(
+                                            fontSize: 45,
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255)),
+                                      ),
+                                      const Icon(
+                                        Icons.dangerous_rounded,
+                                        size: 42,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        // IconButton(
+                        //     style: ButtonStyle(
+                        //         shape: MaterialStateProperty.all(
+                        //             const CircleBorder())),
+                        //     color: Colors.black,
+                        //     onPressed: () {
+                        //       widget.screenClosed();
+                        //       Navigator.pop(context);
+                        //     },
+                        //     icon: const Icon(
+                        //       Icons.backspace_rounded,
+                        //       color: Colors.black,
+                        //     ))
+                      ],
+                    ),
+                  ),
+                ),
     );
   }
 }
